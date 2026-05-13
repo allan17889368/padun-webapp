@@ -99,53 +99,71 @@ select.input {
 .currency-row { margin-bottom: 4px; }
 
 /* CHECKBOXES */
-.checkbox-group { display: flex; flex-direction: column; gap: 2px; }
+.checkbox-group { display: flex; flex-direction: column; }
 .checkbox-item {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 8px 0;
+  gap: 12px;
+  padding: 11px 0;
   cursor: pointer;
-  border-bottom: 1px solid rgba(255,255,255,0.05);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  -webkit-tap-highlight-color: transparent;
 }
 .checkbox-item:last-child { border-bottom: none; }
 .checkbox-item input[type=checkbox] { display: none; }
-.checkbox-item span {
+.checkbox-item > span:not(.check-icon) {
   flex: 1;
   font-size: 15px;
   color: var(--text);
 }
-.checkbox-item::before {
-  content: '';
-  width: 22px;
-  height: 22px;
-  border: 2px solid rgba(255,255,255,0.2);
-  border-radius: 6px;
-  flex-shrink: 0;
-  background: var(--bg);
-  transition: all .15s;
+
+.check-icon {
+  width: 24px;
+  height: 24px;
+  min-width: 24px;
+  border: 2px solid rgba(255,255,255,0.25);
+  border-radius: 7px;
+  background: transparent;
+  transition: background .15s, border-color .15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.checkbox-item:has(input:checked)::before {
+.check-icon::after {
+  content: '';
+  display: block;
+  width: 13px;
+  height: 7px;
+  border-left: 2.5px solid white;
+  border-bottom: 2.5px solid white;
+  transform: rotate(-45deg) translateY(-1px);
+  opacity: 0;
+  transition: opacity .15s;
+}
+.checkbox-item:has(input:checked) .check-icon {
   background: var(--btn);
   border-color: var(--btn);
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 10'%3E%3Cpath fill='white' d='M1 5l3.5 3.5L11 1'/%3E%3C/svg%3E");
-  background-size: 12px;
-  background-repeat: no-repeat;
-  background-position: center;
+}
+.checkbox-item:has(input:checked) .check-icon::after {
+  opacity: 1;
 }
 
 /* PILLS */
-.pill-group { display: flex; gap: 8px; flex-wrap: wrap; }
+.pill-group { display: flex; gap: 10px; flex-wrap: wrap; }
 .pill {
-  padding: 8px 18px;
-  border-radius: 20px;
-  border: 1.5px solid rgba(255,255,255,0.15);
+  flex: 1;
+  min-width: 56px;
+  padding: 10px 8px;
+  border-radius: 10px;
+  border: 1.5px solid rgba(255,255,255,0.18);
   background: var(--bg);
   color: var(--text);
-  font-size: 15px;
-  font-weight: 500;
+  font-size: 16px;
+  font-weight: 600;
   cursor: pointer;
   transition: all .15s;
+  text-align: center;
+  -webkit-tap-highlight-color: transparent;
 }
 .pill.active {
   background: var(--btn);
