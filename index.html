@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>PadunParser — Налаштування</title>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="tabs">
+    <button class="tab active" data-tab="filters">Фільтри</button>
+    <button class="tab" data-tab="blacklist">Чорний список</button>
+    <button class="tab" data-tab="status">Статус</button>
+  </div>
+
+  <!-- ВКЛАДКА ФІЛЬТРИ -->
+  <div id="tab-filters" class="tab-content active">
+
+    <div class="section">
+      <div class="section-title">Місто</div>
+      <select id="city" class="input">
+        <option value="Київ" data-osm="421866">Київ</option>
+        <option value="Львів" data-osm="347050">Львів</option>
+        <option value="Харків" data-osm="314138">Харків</option>
+        <option value="Одеса" data-osm="412029">Одеса</option>
+        <option value="Дніпро" data-osm="316874">Дніпро</option>
+        <option value="Запоріжжя" data-osm="321739">Запоріжжя</option>
+        <option value="Вінниця" data-osm="299825">Вінниця</option>
+      </select>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Типи оголошень</div>
+      <div class="checkbox-group">
+        <label class="checkbox-item">
+          <input type="checkbox" value="flat-rent" name="deal_type" />
+          <span>🏢 Оренда квартир</span>
+        </label>
+        <label class="checkbox-item">
+          <input type="checkbox" value="flat-sell" name="deal_type" />
+          <span>💼 Продаж квартир</span>
+        </label>
+        <label class="checkbox-item">
+          <input type="checkbox" value="flat-rentdaily" name="deal_type" />
+          <span>🌙 Подобова оренда</span>
+        </label>
+        <label class="checkbox-item">
+          <input type="checkbox" value="house-rent" name="deal_type" />
+          <span>🏡 Оренда будинків</span>
+        </label>
+        <label class="checkbox-item">
+          <input type="checkbox" value="house-sell" name="deal_type" />
+          <span>🏡 Продаж будинків</span>
+        </label>
+        <label class="checkbox-item">
+          <input type="checkbox" value="commercial-rent" name="deal_type" />
+          <span>🏪 Оренда комерційної</span>
+        </label>
+        <label class="checkbox-item">
+          <input type="checkbox" value="commercial-sell" name="deal_type" />
+          <span>🏪 Продаж комерційної</span>
+        </label>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Кімнати</div>
+      <div class="pill-group" id="rooms-group">
+        <button class="pill" data-value="1">1</button>
+        <button class="pill" data-value="2">2</button>
+        <button class="pill" data-value="3">3</button>
+        <button class="pill" data-value="4">4+</button>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Ціна</div>
+      <div class="currency-row">
+        <select id="price_currency" class="input input-sm">
+          <option value="UAH">₴ UAH</option>
+          <option value="USD">$ USD</option>
+          <option value="EUR">€ EUR</option>
+        </select>
+      </div>
+      <div class="range-row">
+        <input type="number" id="price_min" class="input" placeholder="Від" min="0" />
+        <span class="range-sep">—</span>
+        <input type="number" id="price_max" class="input" placeholder="До" min="0" />
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Площа (м²)</div>
+      <div class="range-row">
+        <input type="number" id="area_min" class="input" placeholder="Від" min="0" />
+        <span class="range-sep">—</span>
+        <input type="number" id="area_max" class="input" placeholder="До" min="0" />
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Поверх</div>
+      <div class="range-row">
+        <input type="number" id="floor_min" class="input" placeholder="Від" min="1" />
+        <span class="range-sep">—</span>
+        <input type="number" id="floor_max" class="input" placeholder="До" min="1" />
+      </div>
+      <div class="toggle-row">
+        <label class="toggle-label">
+          <input type="checkbox" id="floor_not_first" />
+          <span>Не перший поверх</span>
+        </label>
+        <label class="toggle-label">
+          <input type="checkbox" id="floor_not_last" />
+          <span>Не останній поверх</span>
+        </label>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Рік будівлі</div>
+      <div class="range-row">
+        <input type="number" id="year_min" class="input" placeholder="Від" min="1900" max="2030" />
+        <span class="range-sep">—</span>
+        <input type="number" id="year_max" class="input" placeholder="До" min="1900" max="2030" />
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Додатково</div>
+      <div class="toggle-row">
+        <label class="toggle-label">
+          <input type="checkbox" id="only_owner" />
+          <span>Тільки від власника</span>
+        </label>
+        <label class="toggle-label">
+          <input type="checkbox" id="only_with_photo" />
+          <span>Тільки з фото</span>
+        </label>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ВКЛАДКА ЧОРНИЙ СПИСОК -->
+  <div id="tab-blacklist" class="tab-content">
+    <div class="section">
+      <div class="section-title">Слова для фільтрації</div>
+      <p class="hint">Оголошення з цими словами не надсилатимуться.</p>
+      <div class="add-word-row">
+        <input type="text" id="blacklist-input" class="input" placeholder="Наприклад: комісія" />
+        <button class="btn-add" id="blacklist-add">+</button>
+      </div>
+      <div id="blacklist-tags" class="tags-container"></div>
+    </div>
+  </div>
+
+  <!-- ВКЛАДКА СТАТУС -->
+  <div id="tab-status" class="tab-content">
+    <div class="section">
+      <div class="section-title">Парсер</div>
+      <div class="status-row">
+        <span id="status-text">Завантаження...</span>
+        <div class="toggle-switch">
+          <input type="checkbox" id="status-toggle" />
+          <label for="status-toggle"></label>
+        </div>
+      </div>
+    </div>
+    <div class="section">
+      <div class="stat-item">
+        <span class="stat-label">Місто</span>
+        <span class="stat-value" id="stat-city">—</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-label">Типів оголошень</span>
+        <span class="stat-value" id="stat-types">—</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom-bar">
+    <button class="btn-save" id="btn-save">Зберегти фільтри</button>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
