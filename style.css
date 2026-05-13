@@ -294,6 +294,23 @@ select.input {
 .stat-label { color: var(--hint); font-size: 14px; }
 .stat-value { font-size: 14px; font-weight: 500; }
 
+/* RESET INLINE */
+.btn-reset-inline {
+  width: 100%;
+  padding: 13px;
+  background: rgba(255,59,48,0.12);
+  color: #ff3b30;
+  border: 1.5px solid rgba(255,59,48,0.25);
+  border-radius: var(--radius);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity .15s;
+  margin-bottom: 12px;
+  -webkit-tap-highlight-color: transparent;
+}
+.btn-reset-inline:active { opacity: 0.7; }
+
 /* BOTTOM BAR */
 .bottom-bar {
   position: fixed;
@@ -315,5 +332,6 @@ select.input {
   font-weight: 600;
   cursor: pointer;
   transition: opacity .15s;
+  -webkit-tap-highlight-color: transparent;
 }
 .btn-save:active { opacity: 0.8; }
