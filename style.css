@@ -177,39 +177,46 @@ select.input {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 9px 0;
+  padding: 11px 0;
   cursor: pointer;
   border-bottom: 1px solid rgba(255,255,255,0.05);
+  position: relative;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
 }
 .toggle-label:last-child { border-bottom: none; }
 .toggle-label input[type=checkbox] { display: none; }
 .toggle-label span { flex: 1; font-size: 15px; color: var(--text); }
+
+/* Track */
 .toggle-label::after {
   content: '';
+  flex-shrink: 0;
   width: 44px;
   height: 26px;
   background: rgba(255,255,255,0.15);
   border-radius: 13px;
-  flex-shrink: 0;
-  transition: background .2s;
-  position: relative;
+  transition: background .25s;
 }
 .toggle-label:has(input:checked)::after { background: var(--btn); }
+
+/* Knob — позиціонується абсолютно поверх треку */
 .toggle-label::before {
   content: '';
   position: absolute;
-  right: calc(16px + 22px);
+  right: 20px; /* трек=44px, кружок=22px, відступ=2px → right = 44-22-2 = 20 */
+  top: 50%;
   width: 22px;
   height: 22px;
   border-radius: 50%;
   background: white;
-  box-shadow: 0 1px 3px rgba(0,0,0,.3);
-  transition: transform .2s;
-  margin-top: 2px;
+  box-shadow: 0 2px 4px rgba(0,0,0,.35);
+  transform: translateY(-50%);
+  transition: transform .25s;
+  z-index: 1;
 }
-/* simpler toggle approach */
-.toggle-label {
-  position: relative;
+.toggle-label:has(input:checked)::before {
+  transform: translateY(-50%) translateX(18px); /* 44-22-2*2 = 18 */
 }
 
 /* BLACKLIST */
