@@ -170,3 +170,48 @@ document.getElementById("btn-save").addEventListener("click", () => {
   const filters = collectFilters();
   tg.sendData(JSON.stringify({ action: "save_filters", filters }));
 });
+
+// ── Скидання фільтрів ─────────────────────────────────────────────────────────
+function resetFilters() {
+  // Місто — Київ за замовчуванням
+  document.getElementById("city").value = "Київ";
+
+  // Типи оголошень — знімаємо всі
+  document.querySelectorAll('input[name="deal_type"]').forEach(cb => cb.checked = false);
+
+  // Кімнати — знімаємо всі
+  document.querySelectorAll("#rooms-group .pill").forEach(p => p.classList.remove("active"));
+
+  // Ціна
+  document.getElementById("price_currency").value = "UAH";
+  document.getElementById("price_min").value = "";
+  document.getElementById("price_max").value = "";
+
+  // Площа
+  document.getElementById("area_min").value = "";
+  document.getElementById("area_max").value = "";
+
+  // Поверх
+  document.getElementById("floor_min").value = "";
+  document.getElementById("floor_max").value = "";
+  document.getElementById("floor_not_first").checked = false;
+  document.getElementById("floor_not_last").checked = false;
+
+  // Рік
+  document.getElementById("year_min").value = "";
+  document.getElementById("year_max").value = "";
+
+  // Додатково
+  document.getElementById("only_owner").checked = false;
+  document.getElementById("only_with_photo").checked = false;
+
+  // Чорний список
+  blacklistWords = [];
+  renderBlacklist();
+}
+
+document.getElementById("btn-reset").addEventListener("click", () => {
+  if (!confirm("Скинути всі фільтри до стандартних?")) return;
+  resetFilters();
+  tg.sendData(JSON.stringify({ action: "save_filters", filters: collectFilters() }));
+});
